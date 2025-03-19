@@ -3,18 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask To-Do List</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>To-Do List</title>
 </head>
 <body>
-    <h1>To-Do List</h1>
-    <form action="/add" method="post">
-        <input type="text" name="task" placeholder="Enter task" required>
-        <button type="submit">Add Task</button>
+    <h2>To-Do List</h2>
+
+    <form action="/add" method="POST">
+        <label for="item_id">Item ID:</label>
+        <input type="text" name="item_id" required><br>
+
+        <label for="item_uuid">Item UUID (Auto-generated):</label>
+        <input type="text" name="item_uuid" disabled><br>
+
+        <label for="item_hash">Item Hash (Auto-generated):</label>
+        <input type="text" name="item_hash" disabled><br>
+
+        <label for="item_name">Item Name:</label>
+        <input type="text" name="item_name" required><br>
+
+        <label for="item_description">Item Description:</label>
+        <textarea name="item_description" required></textarea><br>
+
+        <button type="submit">Add Item</button>
     </form>
+
+    <h3>Task List:</h3>
     <ul>
-        {% for task in tasks %}
-        <li>{{ task }} <a href="{{ url_for('delete_task', task_id=loop.index0) }}">❌</a></li>
+        {% for item in todo_list %}
+        <li>
+            <strong>ID:</strong> {{ item.id }} |
+            <strong>UUID:</strong> {{ item.uuid }} |
+            <strong>Hash:</strong> {{ item.hash }} |
+            <strong>Name:</strong> {{ item.name }} |
+            <strong>Description:</strong> {{ item.description }}
+        </li>
         {% endfor %}
     </ul>
 </body>
