@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-# Sample in-memory database (use a database in real-world apps)
+# Samples in-memory database (use a database in real-world apps)
 tasks = []
 
 @app.route('/')
